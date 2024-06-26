@@ -1,0 +1,51 @@
+// written in 24-06-26 
+// there are some scattered informations which might be only understandable if first you go over the text once, then you start doing it
+// open a cmd and here we go. // Or rather said, some steps require a cmd. Try to keep up with the current destintaion from where the commands are given
+
+o How to install, on linux, a compilable flutter without the need of AndroidStudio
+- First download the flutter from, as of now, docs.flutter.dev
+- - Create a location where you want to keep the downloaded app. In my case I create "/my/flutter"
+- - Unpack the flutter archive in the chosen folder
+- - Add the bin path to the PATH (in my case "/my/flutter/bin")
+- - - To add to the path see the way or the command to update yout PATH variable 
+< Now you should be able to see something that is not an error when running "flutter" in console
+
+- Downlaod cmdline-toole, as of now, from here https://developer.android.com/studio#command-line-tools-only
+- - When developing for Android, the way to go seems to be to create an "android/sdk" folder to keep the tools, as the sdk looks for then there. So I created "/my/android/sdk".
+- - Unizp the cmdline-tools content (or commandline-tools) to the, in my case, "/my/android/sdk/cmdline-tools".
+- - After unzipping, you should now have the path "/my/android/sdk/cmdline-tools/cmdline-tools".
+- - The way in which android sdk works, from what I get, is that is looking for a cmdline-tools/latest in the android home directory. Because of this, we will rename the last folder to "latest". Basically in the "latest" folder there are the files from the cmdline-tools archive.
+< After renaming, I have the following path "/my/android/sdk/cmdline-tools/latest".
+
+- We will add the location of the base andorid folder to the system into a variable for an easier installation. We need it named ANDROID_HOME and to have the value of "/my/android/sdk"
+- - This is the base android folder
+
+- We use cmdline-tools sdkmanager to download platform-tools. This is also how we test our installation. The command to use look just a tiny different fron linux or windows. This is to be run in cmd in wour variant of the "/my/android/sdk"
+// %ANDROID_HOME%\cmdline-tools\latest\bin\sdkmanager "nameOfThingToInstall"	// windows variant
+// $ANDROID_HOME\cmdline-tools\latest\bin\sdkmanager "nameOfThingToInstall"	// linux variant
+> $ANDROID_HOME\cmdline-tools\latest\bin\sdkmanager "platform-tools;latest"
+> $ANDROID_HOME\cmdline-tools\latest\bin\sdkmanager "build-tools;32.0.0"
+> $ANDROID_HOME\cmdline-tools\latest\bin\sdkmanager "platforms;android-32"
+- - This is supposed to install platform-tools and the rest in the current directory if the setup of cmdline-tools was properly done. If there is no $ANDROID_HOME (my case since linux), then just use "/my/android/sdk" instead. Though you might need to eventually set it ayway.
+
+- Now back to flutter
+- - Set a system variable FLUTTER_ROOT to the location of the flutter, not the flutter/bin directory
+. FLUTTER_ROOT="/my/flutter" // this is how is done on linux.
+// Basically to set a system variable on a unix machine (linux/apple), wou have to go to the home folder (run in the console the exact followig command "cd ~"). Then you should have in the home folder a hidden file (a file starting with a dot instead of a letter) ending in "rc". I use zsh as the scripting language, which might as well be bash, and because of this I have the file from "~/.zshrc". At the end of my .zshrc file I add the variable declaration from above
+- - The last thing to do is to sign the licenses
+> flutter doctor --android-licences // there are 5 to 6 licenses to sign
+
+o Testing the installation
+: cmd, from any folder
+> flutter create test_project
+> cd test_project
+// connect phone to laptop. Make sure developer option are activated as well as usb debugging
+// Make sure the option of "transfer files" is set, and not just charge-only.
+// A screen on the phone related to accepting a wierd long number simmilar to: A2:11:03:B9:71 (but a bit longer) should appear. If it did not, then run "flutter devices" on the console. It will retry the connection. Also at the end, your device should appear in the list. 
+// After the phone is connected to the laptop
+> flutter run
+// at this point, the app should run. It will take a while, a couple of minutes, at least for the first compilation. At the end should appear a screen on your phone asking to install an app. Hopefully with the 
+
+
+
+

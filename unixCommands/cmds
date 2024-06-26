@@ -1,0 +1,8 @@
+o zip / unzip
+> unzip -d /destfolder zipFile.zip
+
+o tar
+> tar -xf tarFile.tar -C /destfolder
+-- might also be without just the "-C" part
+
+
