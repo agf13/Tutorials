@@ -1,0 +1,7 @@
+
+o Compiling kotlin files from the command line / terminal
+// I will start with the steps, then with the code to follow
+- First create the .jar file
+- Then run the .jar file
+> kotlin someKotlinFile.kt -include-runtime -d resultingJarFile.jar		// created the jar
+> java -jar resultingJarFile.jar										// runs the jar
