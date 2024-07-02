@@ -1,0 +1,52 @@
+      For LINUX
+      Needs Grub
+  And carefull reading. Reason below
+
+//// I am sorry this is not the best format for a tutorial
+//// But It Is the best for it makes you read carefully where info is and makes the reader remember stuff
+//// If you only want the commands, search for the pattern "> ", as this is how all of them start, and it shouldn't be used somewhere else
+
+o Making a multiboot usb
+For this, I will copy-paste the commands and try to provide an explanation to the best of my understanding.
+
+//The device will be prepared in this guide using the traditional msdos layout.
+//We will install grub bootloader in both EFI and legagy mode (BIOS) to be able to start in both UEFI and BIOS mode.
+// Guide resumed from https://linuxconfig.org/how-to-create-multiboot-usb-with-linux
+// For the instructions, we assume that the USB is located at /dev/sdb
+
+
+- We need to configure grub so that we have something that would let us choose between OSs. We will need 2 partitions:
+- - One for the partition tables. In EFI mode. This is where we install grub-efi. We need to format this with a fat32.
+- - One for the data (the ISO images to be stored). This will be formatter with something that is supported by grub
+
+// This command creates the partition table for msdos on the devices
+> sudo parted -s /dev/sdb mklabel msdos
+
+// After creating the partition table, we need the actual partition. Here size is given in Mibibytes. 1MiB=1024KiB (this would be against the 1MB=1000KB)
+// 550MiB is the recomended size for the parition
+> sudo parted -s /deb/sdb mkpart primary 1MiB 551MiB
+
+// We activate the esp and boot flags
+> sudo parted -s /dev/sdb set 1 esp on
+> sudo parted -s /dev/sdb set 1 boot on
+
+// Then we create the fat32 filesystem
+> sudo mkfs.fat -F32 /dev/sdb1
+
+// We then created the other partition to hold ISO files and grub configuration files
+// We can just use the entire rest of the partition. We set it from the last position 551MiB up to end
+> sudo parted -s /dev/sdb mkpart primary 551MiB 100%
+
+// Then we format this new partition to use ext4
+> sudo mkfs.ext4 /dev/sdb2
+
+// To install grub and put the iso files in place we will need to mount the EFI and data parition somewhere in out system.
+> sudo mkdir /media/efi
+> sudo mkdir /media/data
+> sudo mount /dev/sdb1 /media/efi
+> sudo mount /dev/sdb2 /media/data
+
+
+- In order to boot in both UEFI and BIOS, we will need to install grub and grub for efi.
+// In my case, I don't have grub on my system, so I need to somehow install it
+// > 
