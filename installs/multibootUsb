@@ -65,7 +65,7 @@ For this, I will copy-paste the commands and try to provide an explanation to th
 - - > sudo mkdir /media/efi && sudo mkdir /media/data && sudo mount /dev/sdb1 /media/efi && sudo mount /dev/sdb2 /media/data
 - Then I continued with the installation procress
 
-// Install grub for i386-pc. We install it on "/media/data/boot". "/media/data" is the dir made by us pointing to /dev/sdb2, in which we tell it to automatically reate the "boot" directory if it does not exist.
+// Install grub for i386-pc. We install it on "/media/data/boot". "/media/data" is the dir made by us pointing to /dev/sdb2, in which we tell it to automatically create the "boot" directory if it does not exist.
 // Here we use /dev/sdb in the command instead of /dev/sdb2. (copied from the tutorial)
 > sudo grub2-install \
       --target=i386-pc \
@@ -82,5 +82,40 @@ For this, I will copy-paste the commands and try to provide an explanation to th
       --efi-directory="/media/efi" \
       --boot-directory="media/data/boot" \
       --force
+
+// In the following, we will create the grub config files manually.
+// First we need to create the directory to store the files
+> sudo mkdir /media/data/boot/iso
+
+// Then we need to either make ourselves owners of the given directory to move data dreely, or start the file explorer in root mode, or move files with "sudo mv" in terminal.
+// I copied them with the below command and I did this for a couple different .iso files. All moved to the same /media/data/boot/iso folder.
+> sudo cp "path to .iso file" /media/data/boot/iso
+
+// Create the grub.cfg config in the /media/data/boot/grub2
+> sudo vi /media/data/boot/grup2/grub.cfg
+
+// Add the following in the file. "isofile=<sth>" sets a value with the name of isofile. Grub can boot directly from iso, and it can do that from the loop device
+// isofile should have the
+> menuentry "Fedora-Workstation-Live-x86_64-40-1.14" {
+      isofile="/boot/iso/Fedora-Workstation-Live-x86_64-40-1.14"
+      loopback loop "${isofile}"
+      linux (loop)/isolinux/vmlinuz iso-scan/filename="${isofile}" inst.stage2=hd:LABEL=Fedora-WS-dvd-x86_64-28 quiet
+      initrd (loop)/isolinux/initrd.img
+  }
+
+// Then adding another menu entry in the same file
+> menuentry "kali-linux-2024.2-installer-purple-amd64" {
+      isofile="/boot/iso/kali-linux-2024.2-installer-purple-amd64.iso"
+      loopback loop "${isofile}"
+      linux (loop)/casper/vmlinuz iso-scan/filename="${isofile}" boot=casper quiet splash ---
+      initrd (loop)/casper/initrd
+  }
+
+// Now it should present both options at boot time
+
+
+
+
+
 
 
