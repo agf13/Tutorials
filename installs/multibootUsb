@@ -1,10 +1,8 @@
       For LINUX
-      Needs Grub
-  And carefull reading. Reason below
+      Needs Grub (if you don't have it one your system, you can search the web (to no avail for my kali) or make a live Fedora usb bootable. Even there one more step might need to be done, but it will be explained below.
+      And carefull reading. Reason below
 
-//// I am sorry this is not the best format for a tutorial
-//// But It Is the best for it makes you read carefully where info is and makes the reader remember stuff
-//// If you only want the commands, search for the pattern "> ", as this is how all of them start, and it shouldn't be used somewhere else
+      //// If you only want the commands, search for the pattern "> ", as this is how all of them start, and it shouldn't be used somewhere else
 
 o Making a multiboot usb
 For this, I will copy-paste the commands and try to provide an explanation to the best of my understanding.
@@ -49,8 +47,11 @@ For this, I will copy-paste the commands and try to provide an explanation to th
 
 - In order to boot in both UEFI and BIOS, we will need to install grub and grub for efi.
 // In my case, I don't have grub on my system, so I need to somehow install it.
+// For this I paused my installation, made a Fedora bootable usb using a live image (so that I don't have to install the whole OS)
+// I used Fedore Live ISO from here https://fedoraproject.org/workstation/download
+// Which has the direct download link, which I don't necesarily recommend to click since it might be too old for when you read this (currently summer of 2024) but it might prove usefull: https://download.fedoraproject.org/pub/fedora/linux/releases/40/Workstation/x86_64/iso/Fedora-Workstation-Live-x86_64-40-1.14.iso
 - If grub is not installed and you can't find a way to install it, then one option even if a bit of a longer route, is to quickly make a bootable USB with Fedora
-- - If on linux downaload Fedora Live Image (as you don't need to install the OS). Then just do "sudo dd if='path to fedora image' of='path to usb, like /dev/sdc' bs=4M conv=fsync status=progress"
+- - Download Fedora Live Image (as you don't need to install the OS). If on linux then just do "sudo dd if='path to fedora image' of='path to usb, like /dev/sdc' bs=4M conv=fsync status=progress"
 - - You should have a bootable usb with fedora in no time. For other OSs maybe balena etcher can help in making a bootable usb. BEWARE though that the you need to copy the important information from the usb before making it bootable.
 - - Fedora has grub2 by default. At least in the summer of 2024.
 - - In case you have doubts about how to make a bootable usb with one OS, better search the internet 
@@ -60,4 +61,26 @@ For this, I will copy-paste the commands and try to provide an explanation to th
 - - - grub2-efi-x64-modules-1:2.06-123.fc40.noarch
 - - - I chosed the later one to run: 'sudo dnf install grub2-efi-x64-modules-1:2.06-123.fc40.noarch'
 - - - After this command, now I have the x86_64-efi in the "/usr/bin/grub"
+- - I had to remount my usb by recreating the directoried from /media/efi (just a couple of stept above).
+- - > sudo mkdir /media/efi && sudo mkdir /media/data && sudo mount /dev/sdb1 /media/efi && sudo mount /dev/sdb2 /media/data
+- Then I continued with the installation procress
+
+// Install grub for i386-pc. We install it on "/media/data/boot". "/media/data" is the dir made by us pointing to /dev/sdb2, in which we tell it to automatically reate the "boot" directory if it does not exist.
+// Here we use /dev/sdb in the command instead of /dev/sdb2. (copied from the tutorial)
+> sudo grub2-install \
+      --target=i386-pc \
+      --recheck \
+      --boot-directory="/media/data/boot" /dev/sdb
+
+// Now install grub for x86_64-efi. If you don't have it, look directly above "/media/efi" is the directory created by us point to /dev/sdb1, containing the fat32 partition. "/media/data/boot" is the data partition in which the "boot" directory is automatically created
+// It needs --force because secure boot is not available for EFI platforms. I will try to deal with that someday. For the moment I just want my multiboot usb.
+// Secure boot is important to not allow other programs to start when the boot process is happening.
+> sudo grub2-install \
+      --target=x86_64-efi \
+      --recheck \
+      --removable \
+      --efi-directory="/media/efi" \
+      --boot-directory="media/data/boot" \
+      --force
+
 
