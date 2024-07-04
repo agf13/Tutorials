@@ -51,15 +51,15 @@ For this, I will copy-paste the commands and try to provide an explanation to th
 // I used Fedore Live ISO from here https://fedoraproject.org/workstation/download
 // Which has the direct download link, which I don't necesarily recommend to click since it might be too old for when you read this (currently summer of 2024) but it might prove usefull: https://download.fedoraproject.org/pub/fedora/linux/releases/40/Workstation/x86_64/iso/Fedora-Workstation-Live-x86_64-40-1.14.iso
 - If grub is not installed and you can't find a way to install it, then one option even if a bit of a longer route, is to quickly make a bootable USB with Fedora
-- - Download Fedora Live Image (as you don't need to install the OS). If on linux then just do "sudo dd if='path to fedora image' of='path to usb, like /dev/sdc' bs=4M conv=fsync status=progress"
+- - Download Fedora Live Image (as you don't need to install the OS). If on linux then just do > "sudo dd if='path to fedora image' of='path to usb, like /dev/sdc' bs=4M conv=fsync status=progress"
 - - You should have a bootable usb with fedora in no time. For other OSs maybe balena etcher can help in making a bootable usb. BEWARE though that the you need to copy the important information from the usb before making it bootable.
 - - Fedora has grub2 by default. At least in the summer of 2024.
 - - In case you have doubts about how to make a bootable usb with one OS, better search the internet 
 - - After installing Fedora, I only had '/usr/lib/grub/i386-pc'. But I also need '/usr/lib/grub/x86_64-efi'. To overcome this:
-- - - (on fedore dnf seems to used instead of apt) I ran "dnf provides /usr/lib/grub/x86_64-efi". This game me 2 module names which would contain x86_64-efi:
+- - - (on fedore dnf seems to used instead of apt) I ran > "dnf provides /usr/lib/grub/x86_64-efi". This gave me 2 module names which would contain x86_64-efi:
 - - - grub2-efi-x64-modules-1:2.06-119.fc40.noarch 
 - - - grub2-efi-x64-modules-1:2.06-123.fc40.noarch
-- - - I chosed the later one to run: 'sudo dnf install grub2-efi-x64-modules-1:2.06-123.fc40.noarch'
+- - - I chosed the later one to run: > 'sudo dnf install grub2-efi-x64-modules-1:2.06-123.fc40.noarch'
 - - - After this command, now I have the x86_64-efi in the "/usr/bin/grub"
 - - I had to remount my usb by recreating the directoried from /media/efi (just a couple of stept above).
 - - > sudo mkdir /media/efi && sudo mkdir /media/data && sudo mount /dev/sdb1 /media/efi && sudo mount /dev/sdb2 /media/data
