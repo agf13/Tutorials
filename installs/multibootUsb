@@ -1,3 +1,6 @@
+      //// You can follow this for a general idea, but seem not to be working correctly
+
+
       For LINUX
       Needs Grub (if you don't have it one your system, you can search the web (to no avail for my kali) or make a live Fedora usb bootable. Even there one more step might need to be done, but it will be explained below.
       And carefull reading. Reason below
