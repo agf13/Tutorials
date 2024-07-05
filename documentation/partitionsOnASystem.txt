@@ -1,11 +1,25 @@
 // This will contain details about partitions in the way that I get to understand them
 
 o Partitions
+
+* made on secondary memory
+* have a starting point
+* have a size
+* each partition can have a different filesystem
+
 - On a disk, which is a long array of 0/1 symbols, we can separate those into smaller parts, since the word PARTition.
 - The computing device needs to know where on a disk the new partition starts. That is to mean, from which symbol onward the new partition is to be read (i.e.: from the 100th symbol onward). 
 - It also needs to know how big the partition is.(i.e: how many symbols in total does that partition have)
 - Partitions allow creating regions on a disk (HDD,SSD, etc if others) to be managed separately. 
 - The details about a partition, like it's starting point and size is stored in a partition table.
+- Partitions can be both on the PRIMARY and SECONDARY storage. But partitioning is usually created on secondary storage.
+- - PRIMARY storage is the storage directly accesible by CPU (read/write operations are measured in nanoseconds)
+- - SECONDARY storage is the storage which is not accesible by CPU (read/write operations are measured in miliseconds). This is non-volatile memory.
+- - There is alos a TERTIARY storage which is usually manevrated by a robot and is used for storing large amounts of data which is rarely accesible. It is stored on the kind of removable media.
+- - - It usually needs to be copied into the memory (the secondary storage), before use.
+- Partioning is created on the secondary storage because the primary one is used for storing the OS and it's running applications.
+- If one filesystem gets corrupted, the data otside that filesystem remains intact
+
 
 o Partition Table
--
+- 
