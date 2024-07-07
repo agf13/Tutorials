@@ -63,7 +63,7 @@ For this, I will copy-paste the commands and try to provide an explanation to th
 - - - grub2-efi-x64-modules-1:2.06-119.fc40.noarch 
 - - - grub2-efi-x64-modules-1:2.06-123.fc40.noarch
 - - - I chosed the later one to run: > 'sudo dnf install grub2-efi-x64-modules-1:2.06-123.fc40.noarch'
-- - - After this command, now I have the x86_64-efi in the "/usr/bin/grub"
+- - - After this command, now I have the x86_64-efi in the "/usr/lib/grub"
 - - I had to remount my usb by recreating the directoried from /media/efi (just a couple of stept above).
 - - > sudo mkdir /media/efi && sudo mkdir /media/data && sudo mount /dev/sdb1 /media/efi && sudo mount /dev/sdb2 /media/data
 - Then I continued with the installation procress
