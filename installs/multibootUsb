@@ -118,7 +118,11 @@ For this, I will copy-paste the commands and try to provide an explanation to th
 
 
 
-
-
+// So, basically
+// There seems to be a mush of a set of instructions, but it can be simplified in the upper part by only using one partition and wipe the second one.
+// The partition needs to still be primary and formatted with fat32
+// I had some problems with grub when trying to install it on the usb, then rebooting only with the usb plugged to check grub instalation, it did not work unless I used only the x86_64-efi one. There are a lot of platforms grub supports. I believe mine needed that version. So it is still good if you have installed other versions, probably, to work with a bigger number of devices
+// As of now, I can add menu entries, but clicking on them only gets me to an error screen where my only option is to press any key to go back. I have to find how to properly load the kernel and initrd. 
+// The ISO files are kept at root, in a folder named "ISOs". Totally possible. The files needed for boot are in "/boot" and "/EFI" folders.
 
 
