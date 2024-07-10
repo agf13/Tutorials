@@ -124,5 +124,10 @@ For this, I will copy-paste the commands and try to provide an explanation to th
 // I had some problems with grub when trying to install it on the usb, then rebooting only with the usb plugged to check grub instalation, it did not work unless I used only the x86_64-efi one. There are a lot of platforms grub supports. I believe mine needed that version. So it is still good if you have installed other versions, probably, to work with a bigger number of devices
 // As of now, I can add menu entries, but clicking on them only gets me to an error screen where my only option is to press any key to go back. I have to find how to properly load the kernel and initrd. 
 // The ISO files are kept at root, in a folder named "ISOs". Totally possible. The files needed for boot are in "/boot" and "/EFI" folders.
+// Installing grub with either
+      > grub-install --force --removable --target=x86_64-efi --boot-directory=/mnt/boot --efi-directory=/mnt /dev/sdX
+      > grub-install --force --removable --target=i386-efi --boot-directory=/mnt/boot --efi-directory=/mnt /dev/sdX
+      > grub-install --force --removable --target=i386-pc --boot-directory=/mnt/boot /dev/sdX
+      Depending on which target you look for
 
 
