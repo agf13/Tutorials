@@ -2,6 +2,8 @@
 // there are some scattered informations which might be only understandable if first you go over the text once, then you start doing it
 // open a cmd and here we go. // Or rather said, some steps require a cmd. Try to keep up with the current destintaion from where the commands are given
 
+// A working java version should be installed. Java 17 works as of now.
+
 o How to install, on linux, a compilable flutter without the need of AndroidStudio
 - First download the flutter from, as of now, docs.flutter.dev
 - - Create a location where you want to keep the downloaded app. In my case I create "/my/flutter"
@@ -23,10 +25,12 @@ o How to install, on linux, a compilable flutter without the need of AndroidStud
 - We use cmdline-tools sdkmanager to download platform-tools. This is also how we test our installation. The command to use look just a tiny different fron linux or windows. This is to be run in cmd in wour variant of the "/my/android/sdk"
 // %ANDROID_HOME%\cmdline-tools\latest\bin\sdkmanager "nameOfThingToInstall"	// windows variant
 // $ANDROID_HOME\cmdline-tools\latest\bin\sdkmanager "nameOfThingToInstall"	// linux variant
-> $ANDROID_HOME\cmdline-tools\latest\bin\sdkmanager "platform-tools;latest"
+> $ANDROID_HOME\cmdline-tools\latest\bin\sdkmanager "platform-tools;latest" // Might return some java related problem. Look below for more details
 > $ANDROID_HOME\cmdline-tools\latest\bin\sdkmanager "build-tools;32.0.0"
 > $ANDROID_HOME\cmdline-tools\latest\bin\sdkmanager "platforms;android-32"
 - - This is supposed to install platform-tools and the rest in the current directory if the setup of cmdline-tools was properly done. If there is no $ANDROID_HOME (my case since linux), then just use "/my/android/sdk" instead. Though you might need to eventually set it ayway.
+// I encountered some java problemsns here. I tried with a manually installed java 11. Did not work as it was not recognized by the system (linux). I tried with a slightly newer one but was to low.
+// I solved this by installing java through "> sudo apt install default-jre" which installed a java version 17. With this one it worked even without setting JAVA_HOME variable
 
 - Now back to flutter
 - - Set a system variable FLUTTER_ROOT to the location of the flutter, not the flutter/bin directory
