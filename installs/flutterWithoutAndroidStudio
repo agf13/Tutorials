@@ -32,6 +32,10 @@ o How to install, on linux, a compilable flutter without the need of AndroidStud
 // I encountered some java problemsns here. I tried with a manually installed java 11. Did not work as it was not recognized by the system (linux). I tried with a slightly newer one but was to low.
 // I solved this by installing java through "> sudo apt install default-jre" which installed a java version 17. With this one it worked even without setting JAVA_HOME variable
 
+- We need to set the location of the android sdk. Running "> flutter doctor" will tell us this and the facct that the command to run is the following.
+> flutter config --android-sdk /my/android/sdk 
+// Or whichever path you decided to use instead of /my/android
+
 - Now back to flutter
 - - Set a system variable FLUTTER_ROOT to the location of the flutter, not the flutter/bin directory
 . FLUTTER_ROOT="/my/flutter" // this is how is done on linux.
