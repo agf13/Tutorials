@@ -1,4 +1,6 @@
 o Incredibly basic unix commands
+- help // opens the help page
+- clear // erases all content from the open terminal window
 - man command // opens the manual page for the given command. Exit it by pressing "q". Or a random combination of "esc" and "q"
 - cd // change directory. It changed the current location. "cd .." brings you back to the previous folder. 
 - ls -la // list all files and folders from current location
@@ -17,16 +19,26 @@ o Incredibly basic unix commands
 // // Where name is the output of the compilation which can be run, if in the same directory, using ./name
 - sudo command // run the given "command" with super user access. It will request for the admin password.
 // On Kali live, both the user and the admin are called "kali"
+- rm name.extension // deleted the given file
+- - rm -r folderName // deletes a folder. -r means recursive, and need to be given because folder has more files inside
+- cp name.extension /path/to/newName // copies the name.extension to the newName file which it will create in /path/to
+- - cp -r folder /path/to/newFolder // copies a folder
+- mv someName newName // moves or renames the someName to the given newName
 - cat name.extension // This will output the contents of the name.extension file in the console
 - use CTRL+C when a program does not seem to work or when you want to quit it or when you started something by mistake
 - use ALT+F4 when you want to close the current window
 - head name.extension // prints the first 10 lines
 - tail name.extension // prints the last 10 lines
 - watch -n 0.1 "some program or command" // will rerun the command given in "" every 0.1 seconds and will show you the output
-- chmod 777 name.extension // Grants all permissions to a file. 7 means rwx.
+- chmod 777 name.extension // Grants all permissions for everyone to a file. 7 means rwx.
 
 - - So basically important are
-- - - man, cd, ls, vi, vim, cat
+- - - help, man, cd, ls, vi, vim, rm, cp, mv, cat, clear, head, tail, watch, chmod
+
+o binary
+- Just 0 and 1
+- Instead of having 731 = 7*10^2 + 3*10^1 + 1*10^0 we have 1010 = 1*2^3 + 1*2^1 = 10
+- To find 10 in binary: 10/2 = 5(rest 0), 5/2 = 2(rest 1), 2/2 = 1(rest 0), 1/2 = 0(rest 1) => 10 = 1010
 
 o zip / unzip
 > unzip -d /destfolder zipFile.zip
@@ -37,4 +49,12 @@ o tar
 // might also be without just the "-C" part
 // archive
 
-
+o parted
+> parted /dev/sda mklabel msdos
+// not sure how important, it puts the msdos label on the given partition
+> parted /dev/sda mkpart primary 1Mib 100%
+// this will createa partition from the first Mib to the end of the space from /dev/sda.
+> parted /dev/sda rm 
+// this will remove a partition. It will ask for the number of the partition. Usually /dev/sda appears when 
+// // a usb is inserted. And they will be available /dev/sda1 /dev/sda2, maybe less maybe more.
+// // to delete /dev/sda2 you input 2 in the prompt after the rm command
