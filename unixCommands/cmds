@@ -1,8 +1,24 @@
+o Incredibly basic unix commands
+- cd // change directory. It changed the current location
+- ls -la // list all files and folders from current location
+- vi name.extension // openes the vile names name.extension from the current location. If not there, then it creates it
+- vim name.extension // same as above
+// When in vi or vim, it very important:
+// When first started, vi or vim is in the "normal mode". Nothing can be inputed here
+// Click the "i" key to start editing text. This is the "edit mode"
+// Pressing "esc" will put you back in edit mode
+// To exit, you need to be in nornal mode and to press ":" "q" "w". Basically is will look ":qw"
+// : is for apply followig command, q is for quit, w is for write (save changes)
+- sudo command // run the given "command" with super user access. It will request for the admin password.
+// On Kali live, both the user and the admin are called "kali"
+
 o zip / unzip
 > unzip -d /destfolder zipFile.zip
+// archive
 
 o tar
 > tar -xf tarFile.tar -C /destfolder
--- might also be without just the "-C" part
+// might also be without just the "-C" part
+// archive
 
 
