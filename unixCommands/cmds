@@ -1,7 +1,15 @@
-o Incredibly basic unix commands
+// what starts with oo is a favourite command
+
+o Incredibly basic unix command
+- - So basically important are
+- - - help, man, pwd, cd, ls, vi, vim, rm, cp, mv, cat, clear, head, tail, watch, chmod, vimtutor
+- - - "the TAB key"
+
 - help // opens the help page
+- using TAB autocompletes commands, files and folders, or shows the existing options for the continuations
 - clear // erases all content from the open terminal window
 - man command // opens the manual page for the given command. Exit it by pressing "q". Or a random combination of "esc" and "q"
+- pwd // print working directory. It prints where are you located in the file system. ex.: /home/username/eu/apps
 - cd // change directory. It changed the current location. "cd .." brings you back to the previous folder. 
 - ls -la // list all files and folders from current location
 - vi name.extension // openes the vile names name.extension from the current location. If not there, then it creates it
@@ -31,9 +39,12 @@ o Incredibly basic unix commands
 - tail name.extension // prints the last 10 lines
 - watch -n 0.1 "some program or command" // will rerun the command given in "" every 0.1 seconds and will show you the output
 - chmod 777 name.extension // Grants all permissions for everyone to a file. 7 means rwx.
+- vimtutor // if available, it will explain how to navigate inside vim. There is a chance that not all commands work for vi as well
 
-- - So basically important are
-- - - help, man, cd, ls, vi, vim, rm, cp, mv, cat, clear, head, tail, watch, chmod
+
+o symbols for directories
+. means current directory (current location: ex /some/path/to/here)
+.. means parent directory (kinda previous location: ex /some/path/to)
 
 o binary
 - Just 0 and 1
@@ -50,6 +61,7 @@ o tar
 // archive
 
 o parted
+// this is a toll to manage partitions
 > parted /dev/sda mklabel msdos
 // not sure how important, it puts the msdos label on the given partition
 > parted /dev/sda mkpart primary 1Mib 100%
@@ -58,3 +70,37 @@ o parted
 // this will remove a partition. It will ask for the number of the partition. Usually /dev/sda appears when 
 // // a usb is inserted. And they will be available /dev/sda1 /dev/sda2, maybe less maybe more.
 // // to delete /dev/sda2 you input 2 in the prompt after the rm command
+
+o mkfs
+> mkfs.ext3 /dev/sda
+// This will format the /dev/sda partition with ext3. /dev/sda1 or other partitions can be used
+> mkfs.ext3 /dev/sda1
+Possible formats for mkfs include ext1, ext2, ext3, ext4, fat, vfat and others. Best see "man mkfs"
+
+oo the dd command
+> dd if=/dev/zero of=/dev/sda bs=4M conv=fsync status=progress
+// this will copy zeros over the given partition, basically wiping it out
+// wou can also use /dev/random to copy random data over the given partition
+// if = input file, of = output file, bs=block size, conv = ?, status=progress = show the status of the operation
+> dd if=/path/to/file.iso of=/dev/sda bs=4M conv=fsync status=progress
+// this command will make the /dev/sda bootable and it will boot the file.iso which is usually an operating system
+
+oo airodump-ng
+> airodump-ng wlan0 -c 1,2,3 -w file
+// This will sniff out the wifi traffic around for the channels 1,2 and 3
+// It will write the intercepted packets in files whos names start with "file"
+// But one important aspects is that it lets you see which routers are around you and who is connected to them
+// To find what to use instead of wlan0 (the interface name), run ifconfig. Is the first word that appears on new paragraphs
+// To put the wifi card in monitor mode:
+// // sudo ifconfig wlan0 down
+// // sudo iwconfig wlan0 mode monitor
+// // sudo ifconfig wlan0 up
+// // sudo airmon-ng check kill (to kill every process that might use the network card, important for sniffing)
+// // // Now you are in monitor
+// To get out of the monitor mode back to the managed mode
+// // sudo ifconfig wlan0 down
+// // sudo iwconfig wlan0 mode managed
+// // sudo ifconfig wlan0 up
+// // sudo systemctl start NetworkManager
+// // // Now the wifi interface should work again. If not, restart pc. Or try again. Or check iwconfig to see the mode of the wifi interface
+
