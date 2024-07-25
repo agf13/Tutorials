@@ -1,0 +1,17 @@
+#!/bin/zsh
+
+# Just to have sudo access from the start. Usually echo does not need to be run with sudo
+sudo echo 'Starting flutter setup'
+
+# Setup flutter
+# # Unarchive to the flutter directory
+sudo tar -xf /f/flutter/flutter_linux_3.19.4-stable.tar.xz -C /f/flutter
+echo '\n# add flutter to PATH\nexport PATH=/f/flutter/flutter/bin:$PATH' >> ~/.zshrc
+/f/flutter/flutter/bin/flutter config --android-sdk /f/android/sdk
+
+echo 'Starting java setup'
+
+# Change java version to 17, since 19 is too big to work with the current gradle version of the flutter framework
+# # Delete the current link and remake it to point to the desired version
+sudo rm /etc/alternatives/java
+sudo ln -s /f/jvm/java-17-openjdk-amd64/bin/java /etc/alternatives/java
