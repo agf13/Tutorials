@@ -1,0 +1,8 @@
+
+o Video devices on linux
+Video devices are stored as files like /dev/video0, /dev/video1, etc
+- Video devices can be checked bu running > v4l2-ctl --list-devices // v4l2 = video4linux and is installed from v4l-utils
+- If more than one device appears and only one camera is physically installed, then the others may have been created by other programs
+or they are virtual devices
+- Sometimes this might influence the open of a camera making it unable to open
+- To open the camera from terminal in linux
