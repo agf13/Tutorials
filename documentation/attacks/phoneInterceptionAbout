@@ -1,0 +1,48 @@
+A mobile phone calls and messages can be almost easily interceptable
+
+o Intercepting phone calls / messages
+- Steps:
+- - Get SS7 (Signaling System 7) access
+- - Get a valid IMSI
+- - Attack
+
+
+- SS7 is the protocol used to authenticate users mainly in Roaming
+\ For example when getting in a new country, the service provider there
+\ would reach out to your mobile provider from your country to ask
+\ if they are willing to pay for the costs the user will do in their
+\ network. This is done over SS7
+// Basically to ask if the user is legit
+
+- - In the past, confirming that a line was open for a call involved the playing
+- \ of a 2600 Hz sound (which incidentally was the exact sound a flute for cereal
+- \ was making). When both parties played the frequency, the connection would be
+- \ considered made and the call could start.
+// Of course, easily hackable
+- \ What is interesting is that when buttons were introduced, they were assigned
+- \ Frequencies which were used as actual sounds to recognize the numbers being
+- \ pressed.
+// ... Anyway
+- - SS7 is a global network
+- - SS7 provides a GT (Global title) to assess legitimacy of using the network
+- - Having access to one GT basically means you have access to all GTs they 
+- \ have a partnership with
+- - In the past SS7 was pretty secure, as there were only a couple of service providers
+- \ for calls and they would trust each other to maintain the security. Nowadays
+- \ there are over 1200 operators and 4500 networks, and not every of them is honest.
+- \ Some of those operators sell for a couple thousands dolars per month their access
+- \ to SS7 (and this is considered as not that expensive). If not, some can be hacked.
+[x] ( STEP 1 ACQUIRED )
+- IMSI = international mobile subscriber identity (it has 15 digits)
+- - Having access to a SS7, requests can be send to other networks
+- \ (i.e. the one the target is on) to get the IMSI of the target
+- \ Some networks have firewalls for some of the requests.
+- \ Basically only the phone number is needed to gain this information
+
+- After all those steps attacks can be started
+- - Having IMSI and SS7 access, the calls can be routed to another phone
+- \ without the legitimate destination to be in any way prompted or disturbed.
+- \ Everything can look perfectly ok for the target.
+- \ Even the 2FA messages can be easily stolen.
+- \ Or calls can be routed thorugh another party to record them.
+
