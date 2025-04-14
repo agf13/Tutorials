@@ -15,3 +15,5 @@ echo 'Starting java setup'
 # # Delete the current link and remake it to point to the desired version
 sudo rm /etc/alternatives/java
 sudo ln -s /f/jvm/java-17-openjdk-amd64/bin/java /etc/alternatives/java
+
+U+E0001 U+E0048 U+E0069 U+E002C U+E0020 U+E0068 U+E006F U+E0077 U+E0020 U+E0061 U+E0072 U+E0065 U+E0020 U+E0079 U+E006F U+E0075 U+E0020 U+E0064 U+E006F U+E0069 U+E006E U+E0067 U+E003F U+E007F
