@@ -1,0 +1,60 @@
+o Pentru a folosi firewalld sunt un numar de comenzi ce voi incerca sa le eplic asa cum reusesc sa le
+inteleg
+In primul rand de notat este faptul ca aceste comenzi trebuie rulate dintr-un cmd (terminal).
+
+> firewall-cmd --get-zones
+Comanda de deasupra listeaza zonele disponibile. Sunt 10 la numar default, dar se poate sa fie mai
+multe, ca spre exemplu mie mi-au aparut 2 in plus dupa ce am inceput sa le configurez.
+Ele pot fi configurate in functie de ceea ce este necesar in acel moment.
+ Cateva zone sunt "public", "dmz", unde zona "public" are anumite servicii acceptate de genul ssh,
+mdms, dhcpv6-client. O alta zona este "dmz" (= demilitarizata), si ea deobice se foloseste pentru 
+device-uri care stau intre internetul public si cel privat. "dmz" are doar serviciul de ssh acceptat.
+
+> firewall-cmd --list-add
+Comanda de deasupra listeaza toate serviciile asociate unei zone. Daca nici-o zona nu este specificata,
+atunci se arata serviciile zonei setata ca deafault. Pentru a vedea serviciile unei anumite zone se
+specifica zona folosing argumentul --zone
+> firewall-cmd --list-add --zone=public
+Comanda de mai sus specifica ceea ce este setat pentru zona publica.
+
+> firewall-cmd --set-default=zonename
+Comanda de mai sus este folosita pentru a seta ce zona sa fie folosita ca default.
+
+- Pentru a adauga sau a scoate servicii
+> sudo firewall-cmd --zone=public --add-service=ftp
+De observat ca se foloseste sudo aici, adica e nevoie de permisiuni de admin or de a face modificari
+pentru a putea folosi comanda. Aceasta comanda este folosita pentru a adauga serviciul de ftp (file
+transfer protocol) la zona publica.
+!! De notat ca setarea serviciului de ftp este temporara pentru sesiunea curenta. In momentul in care
+configuratia se reincarca, acest serviciu se pierde. Practic daca se face:
+
+> sudo firewall-cmd --reload
+Atunci se reincarca configuratia. Daca vrem ca aceasta sa fie permanenta, in mod evident, folosim
+argumentul --permanent
+
+> sudo firewall-cmd --zone=public --add-service=ftp --permanent
+Cu comanda de mai sus, ftp-ul este adaugat ca serviciu permanent la zona publicai (sau putem fi
+mai corecti, la configuratia publica)
+!! Cand se foloseste --permanent, configuratia trebuie sa fie reincarcata pentre a lua efect. Acest
+lucru se face cu comanda de mai sus "firewall-cmd --reload".
+
+> sudo firewall-cmd --zone=public --remove-service=ftp --permanent
+Argumentul "--permanent" este optional, dar fara el, setarea i-a efect imediat si tine doar pentru
+sesiunea curenta. Cu argumentul (sau steagul / flag) "--permanent", este nevoie de reincarcarea
+configuratiilor.
+
+> firewall-cmd --zone=external --list-services
+Asa se pot lista toate serviciile unei zone. Diferit de --list-all deoarece aceasta chiar listeaza
+doar serviciile. --list-all listeaza si restul de informatii pentru zona respectiva.
+
+> sudo firewall-cmd --permanent --zone=external --add-port=60001/udp
+Daca e nevoie sa adaugam porturi ce nu sunt standard, putem adauga portul si serviciul cu argumentul
+"--add-port <port>/<service>".
+
+> sudo firewall-cmd --permanent --zone=external --remove-port=60001/udp
+Si in asa fel de poate face remove la un port ce e setat sa functioneze pe udp.
+
+> sudo firewall-cmd --zone=external --list-ports
+Cu comanda de mai sus se poat lista regulile porturilor si cum sunt aceastea setate 
+
+

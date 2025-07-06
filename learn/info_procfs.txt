@@ -1,0 +1,11 @@
+
+o proc
+= este un psudo sistem de fisiere care ofera o interfata pentru strucutrile de date din kernel.
+Este deobicei mounted la /proc automat de catre sistem, dar poate si mounted si manual folosind
+> mount -t proc proc /proc
+
+Majoritatea fisierelor din proc sunt read-only, dar unele sunt si editabile, lucru ce ofera optiunea
+de a modifica anumite variabile din kernel.
+
+Exista un thread pe reddit unde se recomanda o anumita limitarea a lui procfs pentru securitate.
+Mai exact se recomanda hidepid ce cel mai probabil se redera la ascunderea unui pid.

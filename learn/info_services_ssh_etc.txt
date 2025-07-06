@@ -1,0 +1,31 @@
+
+o dhcpv6-client
+This is needed when communicating over IP v6. When a request is send for the first time to a server
+the request is coming from a unicast address. The response from the server comes from a multicast
+address. For this reason, it will be blocked because is not the same source, so this client was
+created as a set of rules to allow this communication.
+
+o mdns (multicast DNS)
+DNS = Domain Name Server
+
+Scopul lui mdns este de a traduce ip-uri in nume de host-uri pentru comunicare.
+Acest lucru se face in network-urile mici si nu necesita configurare.
+Construit similar cu DNS doar ca pentru local network.
+
+Cand se trimite un IP catre serverul de mDNS, toate device-urile din acel network asculta dupa acea
+adresa. Daca vreunul dintre device-uri poate raspunde request-ului, acesta este liber sa raspunda.
+
+DNS-ul este cel care transforma 8.8.8.8 -> google.com . Deobicei traduce in adrese ce se termina cu
+.com, .info, .wiki ...
+mDNS-ul transforma adrese de genul 224.0.0.54 -> printer.local . Deobicei traduce adresele pentru
+conectare la imprimanta sau alt device local la care se poate conecta local. Se termina in .local .
+
+o samba-client (smbclient)
+Este un client similar cu ftp-ul (File Transfer Protocol) a carui scop este sa permita manipularea
+(upload si download) de resurse de tip SMB/CIFS de pe servere.
+
+o ftp
+File Transfer Protocol este un client ce permite comnuciarea cu un server pentru a manipula fisiere.
+Se foloseste pentru a retrage sau a pune fisiere pe acel server. In felul asta se pote mentine un
+website spre exemplu. Prin ftp ne putem conecta la locatia online unde website-ul este stocat si putem
+adauga, sterge sau descarca fisiere.

@@ -1,0 +1,16 @@
+
+o Multicast
+- a multicast address is used to represent a grup of nodes
+- using it data can be sent to multiple devices
+- devices can be from different networks
+These kind of addresses use class D ip address range, which is (224.0.0.0 - 239.255.255.255).
+
+
+The source address of a multicast is a unicast.
+The destination address of a multicast is multicast.
+
+o Unicast
+- it uniquely identifies one single device on a network
+
+o Broadcast
+- it identifies the whole network. Basically all devices on the same network.
